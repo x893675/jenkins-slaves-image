@@ -7,7 +7,7 @@ matrix:
   - env: go_version=1.12.7
 
 install:
-  - cd golang && docker build --build-arg go_version="$go_version" -t hanamichi/jenkins-slaves-golang:"$go_version ."
+  - cd golang && docker build . -t hanamichi/jenkins-slaves-golang:"$go_version" --build-arg go_version="$go_version" 
 
 script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
