@@ -1,0 +1,7 @@
+#!/bin/bash
+
+docker build \
+    --file "${DOCKERFILE_PATH}" \
+    --build-arg go_version="1.12.7" \
+    --tag "$IMAGE_NAME" \
+    .
