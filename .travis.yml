@@ -1,0 +1,14 @@
+language: bash
+services: docker
+
+matrix:
+  include:
+  - env: go_version=1.11.2
+  - env: go_version=1.12.7
+
+install:
+  - docker build --build-arg go_version="$go_version" -t hanamichi/jenkins-slaves-golang:"$go_version"
+
+script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push hanamichi/jenkins-slaves-golang:"$go_version"
