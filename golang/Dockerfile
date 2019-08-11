@@ -1,6 +1,8 @@
 FROM openshift/jenkins-slave-base-centos7:v3.11
 
-ENV GO_VERSION_DEFAULT=1.11.2 \
+ARG go_version=1.11.2
+
+ENV GO_VERSION_DEFAULT=$go_version \
     GOROOT=/usr/local/go \
     GOPATH=/usr/src/go
 ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
@@ -25,7 +27,3 @@ RUN if [ -z $GO_VERSION ] ; then GO_VERSION=${GO_VERSION_DEFAULT} ; fi && \
     rm -f /usr/go${GO_VERSION}.linux-amd64.tar.gz
 
 USER 1001
-
-# useful for verification of install
-# RUN go version
-# RUN go env
