@@ -1,14 +1,23 @@
 language: bash
 services: docker
 
-matrix:
+jobs:
   include:
-  - env: go_version=1.11.2
-  - env: go_version=1.12.7
-
-install:
-  - cd golang && docker build . -t hanamichi/jenkins-slaves-golang:"$go_version" --build-arg go_version="$go_version" 
-
-script:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push hanamichi/jenkins-slaves-golang:"$go_version"
+    - stage: build-golang1.11.2
+      script:
+        - cd golang && docker build . -t hanamichi/jenkins-slaves-golang:1.11.2 --build-arg go_version="1.11.2"
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker push hanamichi/jenkins-slaves-golang:1.11.2 
+      if: commit_message =~ ^.*\[build-golang1.11.2\].*$
+    - stage: build-golang1.12.7
+      script:
+        - cd golang && docker build . -t hanamichi/jenkins-slaves-golang:1.12.7 --build-arg go_version="1.12.7"
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker push hanamichi/jenkins-slaves-golang:1.12.7 
+      if: commit_message =~ ^.*\[build-golang1.12.7\].*$
+    - stage: build-ansible2.7.11
+      script:
+        - cd ansible && docker build . -t hanamichi/jenkins-slaves-ansible:2.7.11 
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker push hanamichi/jenkins-slaves-ansible:2.7.11 
+      if: commit_message =~ ^.*\[build-ansible2.7.11\].*$

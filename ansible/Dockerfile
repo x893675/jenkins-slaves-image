@@ -3,7 +3,7 @@ FROM openshift/jenkins-slave-base-centos7:v3.11
 ENV BASH_ENV=/usr/local/bin/scl_enable \
     ENV=/usr/local/bin/scl_enable \
     PROMPT_COMMAND=". /usr/local/bin/scl_enable" \
-    ANSIBLE_VERSION=2.7.0 \
+    ANSIBLE_VERSION=2.7.11 \
     ANSIBLE_REVISION=1
 
 RUN INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 git tree vim unzip curl python2-pip scl-utils" && \
