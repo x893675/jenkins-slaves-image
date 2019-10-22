@@ -21,3 +21,9 @@ jobs:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker push hanamichi/jenkins-slaves-ansible:2.7.11 
       if: commit_message =~ ^.*\[build-ansible2.7.11\].*$
+    - stage: build-docker
+      script:
+        - cd docker && docker build . -t hanamichi/jenkins-slaves-docker:1.13
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker push hanamichi/jenkins-slaves-docker:1.13
+      if: commit_message =~ ^.*\[build-docker\].*$
