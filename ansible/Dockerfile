@@ -6,7 +6,7 @@ ENV BASH_ENV=/usr/local/bin/scl_enable \
     ANSIBLE_VERSION=2.7.11 \
     ANSIBLE_REVISION=1
 
-RUN INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 git tree vim unzip curl python2-pip scl-utils" && \
+RUN INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 git tree vim unzip curl python2-pip scl-utils jq" && \
     x86_EXTRA_RPMS=$(if [ "$(uname -m)" == "x86_64" ]; then echo -n java-1.8.0-openjdk-devel.i686 ; fi) && \
     yum install -y epel-release && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS $x86_EXTRA_RPMS \
