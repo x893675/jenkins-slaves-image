@@ -21,8 +21,10 @@ RUN INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 git tree vim unzip curl python
 ADD contrib/bin/scl_enable /usr/local/bin/scl_enable
 ADD contrib/bin/configure-slave /usr/local/bin/configure-slave
 
+RUN useradd -u 1001 -G root -d /home/jenkins -s /bin/bash ansible
+
 #RUN chown -R 1001:0 $HOME && \
 #    chmod -R g+rw $HOME
 
-#USER 1001
+USER ansible
 
