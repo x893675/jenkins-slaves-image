@@ -17,4 +17,5 @@ RUN curl -L -o /tmp/sonar-scanner.zip https://binaries.sonarsource.com/Distribut
     ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner && \
     chmod 755 /usr/local/bin/sonar-scanner
 
-RUN yum install gcc make docker-client -y && yum clean all
+RUN yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && \
+    yum install gcc make docker-ce-cli -y && yum clean all
