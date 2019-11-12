@@ -19,9 +19,10 @@ WORKDIR /home/jenkins
 ADD contrib/bin/scl_enable /usr/local/bin/scl_enable
 ADD contrib/bin/configure-slave /usr/local/bin/configure-slave
 
-RUN INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 git tree vim unzip curl python2-pip scl-utils jq gcc make docker-client" && \
+RUN INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 git tree vim unzip curl python2-pip scl-utils jq gcc make docker-ce-cli" && \
     x86_EXTRA_RPMS=$(if [ "$(uname -m)" == "x86_64" ]; then echo -n java-1.8.0-openjdk-devel.i686 ; fi) && \
     yum install -y epel-release && \
+    yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS $x86_EXTRA_RPMS \
       https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-${ANSIBLE_VERSION}-${ANSIBLE_REVISION}.el7.ans.noarch.rpm && \
     rpm -V ansible && \
