@@ -29,7 +29,7 @@ jobs:
       if: commit_message =~ ^.*\[build-docker\].*$
     - stage: build-aio
       script:
-        - cd alltool && docker build . -t 99cloud/jenkins-slaver-aio:v1.0
+        - cd alltool && docker build . -t 99cloud/jenkins-slaver-aio:latest
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker push 99cloud/jenkins-slaver-aio:latest
       if: commit_message =~ ^.*\[build-aio\].*$
